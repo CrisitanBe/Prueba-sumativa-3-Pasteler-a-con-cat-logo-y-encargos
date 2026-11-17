@@ -9,6 +9,18 @@
 <p>Apto para celíacos: {% if producto.apto_celiacos %}Sí{% else %}No{% endif %}</p>
 <p>Stock: {{ producto.stock }}</p>
 {% if producto.agotado %}<p><strong>Agotado por hoy</strong></p>{% endif %}
-{# el formulario de encargo se agrega en el Paso 10 #}
+<h2>Hacer encargo</h2>
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for campo in form %}
+        <p>
+            {{ campo.label_tag }}
+            {{ campo }}
+            {{ campo.errors }}
+        </p>
+    {% endfor %}
+    <button type="submit">Encargar</button>
+</form>
 <p><a href="{% url 'catalogo:inicio' %}">Volver al catálogo</a></p>
 {% endblock %}
