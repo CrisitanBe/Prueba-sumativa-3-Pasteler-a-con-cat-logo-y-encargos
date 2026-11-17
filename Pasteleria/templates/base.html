@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Pastelería</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'catalogo:inicio' %}">Catálogo</a>
+    </nav>
+{% for m in messages %}
+    <p class="aviso">{{ m }}</p>
+{% endfor %}
+    {% block contenido %}{% endblock %}
+</body>
+</html>
+

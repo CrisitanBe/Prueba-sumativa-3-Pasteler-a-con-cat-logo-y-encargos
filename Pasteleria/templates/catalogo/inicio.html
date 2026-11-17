@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block contenido %}
+<h1>Nuestros productos</h1>
+<ul class="catalogo">
+{% for p in productos %}
+    <li>
+        <img src="{{ p.foto_url }}" alt="{{ p.nombre }}" height="120">
+        <strong>{{ p.nombre }}</strong>
+        <span>{{ p.linea.nombre }}</span>
+        <strong>{{ p.precio_clp }}</strong>
+        {% if p.agotado %}<em>Agotado por hoy</em>{% endif %}
+    </li>
+{% empty %}
+    <li>Todavía no hay productos cargados.</li>
+{% endfor %}
+</ul>
+{% endblock %}
