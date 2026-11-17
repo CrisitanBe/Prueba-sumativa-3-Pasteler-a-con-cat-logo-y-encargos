@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block contenido %}
+<h1>{{ producto.nombre }}</h1>
+<img src="{{ producto.foto_url }}" alt="{{ producto.nombre }}" height="240">
+<p>Línea: {{ producto.linea.nombre }}</p>
+<p>{{ producto.descripcion }}</p>
+<p>Precio: {{ producto.precio_clp }}</p>
+<p>Porciones: {{ producto.porciones }}</p>
+<p>Apto para celíacos: {% if producto.apto_celiacos %}Sí{% else %}No{% endif %}</p>
+<p>Stock: {{ producto.stock }}</p>
+{% if producto.agotado %}<p><strong>Agotado por hoy</strong></p>{% endif %}
+{# el formulario de encargo se agrega en el Paso 10 #}
+<p><a href="{% url 'catalogo:inicio' %}">Volver al catálogo</a></p>
+{% endblock %}

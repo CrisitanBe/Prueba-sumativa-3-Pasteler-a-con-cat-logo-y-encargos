@@ -17,7 +17,7 @@
 {% for p in productos %}
     <li>
         <img src="{{ p.foto_url }}" alt="{{ p.nombre }}" height="120">
-        <strong>{{ p.nombre }}</strong>
+        <a href="{% url 'catalogo:detalle' p.id %}">{{ p.nombre }}</a>
         <span>{{ p.linea.nombre }}</span>
         <strong>{{ p.precio_clp }}</strong>
         {% if p.agotado %}<em>Agotado por hoy</em>{% endif %}
