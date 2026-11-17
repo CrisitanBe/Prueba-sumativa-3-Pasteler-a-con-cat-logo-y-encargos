@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 {% block contenido %}
 <h1>Nuestros productos</h1>
+
+<form method="get">
+    <input name="q" value="{{ request.GET.q }}">
+    <select name="linea">
+        <option value="">Todas</option>
+        {% for l in lineas %}
+            <option value="{{ l.id }}">{{ l.nombre }}</option>
+        {% endfor %}
+    </select>
+    <button>Buscar</button>
+</form>
+
 <ul class="catalogo">
 {% for p in productos %}
     <li>
