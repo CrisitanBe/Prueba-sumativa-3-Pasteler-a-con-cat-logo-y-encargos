@@ -1,0 +1,1 @@
+Se usó la asistencia de gemini para generar el codigo html de los archivos de catalogo y resolver dudas en cuanto al contenido de materia y como apoyo del desarrollo tambien para los comandos de github.
