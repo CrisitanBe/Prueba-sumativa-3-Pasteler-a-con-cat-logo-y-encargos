@@ -19,22 +19,18 @@ def inicio(request):
 
 
 def detalle(request, id):
-    producto = get_object_or_404(
-        Producto.objects.select_related('linea'),
-        id=id,
-        disponible=True
-    )
-    if request.method == 'POST':
-        form = EncargoForm(request.POST)
+    producto = get_object_or_404(Producto.objects.select_related('linea'),
+    id=id, disponible=True)
+    if request.method == 'POST' and not producto.agotado:
+        form = EncargoForm(request.POST, producto=producto)
         if form.is_valid():
             encargo = form.save(commit=False)
             encargo.producto = producto
             encargo.save()
+            producto.stock -= encargo.cantidad
+            producto.save()
             messages.success(request, 'Encargo registrado.')
             return redirect('catalogo:detalle', id=producto.id)
     else:
-        form = EncargoForm()
-    return render(request, 'catalogo/detalle.html', {
-        'producto': producto,
-        'form': form
-    })
+        form = EncargoForm(producto=producto)
+    return render(request, 'catalogo/detalle.html',{'producto': producto, 'form': form})
