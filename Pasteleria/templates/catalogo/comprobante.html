@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block contenido %}
+<h1>Comprobante de encargo</h1>
+<p>Código: {{ encargo.codigo }}</p>
+<p>Producto: {{ encargo.producto.nombre }}</p>
+<p>Nombre: {{ encargo.nombre }}</p>
+<p>Cantidad: {{ encargo.cantidad }}</p>
+<p>Fecha de retiro: {{ encargo.fecha_retiro }}</p>
+<p>Total: {{ encargo.total_clp }}</p>
+<p>Fecha y hora del encargo: {{ encargo.creado }}</p>
+<p><a href="{% url 'catalogo:inicio' %}">Volver al catálogo</a></p>
+{% endblock %}

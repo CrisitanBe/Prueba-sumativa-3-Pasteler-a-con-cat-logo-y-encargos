@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, Linea
+from .models import Producto, Linea, Encargo
 from .forms import EncargoForm
 
 
@@ -30,7 +30,12 @@ def detalle(request, id):
             producto.stock -= encargo.cantidad
             producto.save()
             messages.success(request, 'Encargo registrado.')
-            return redirect('catalogo:detalle', id=producto.id)
+            return redirect('catalogo:comprobante', id=encargo.id)
     else:
         form = EncargoForm(producto=producto)
     return render(request, 'catalogo/detalle.html',{'producto': producto, 'form': form})
+
+def comprobante(request, id):
+    encargo = get_object_or_404(
+        Encargo.objects.select_related('producto'), id=id)
+    return render(request, 'catalogo/comprobante.html',{'encargo': encargo})
